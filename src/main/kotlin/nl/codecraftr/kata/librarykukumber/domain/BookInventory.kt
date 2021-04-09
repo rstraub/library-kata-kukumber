@@ -1,4 +1,4 @@
-package nl.codecraftr.kata.librarykukumber
+package nl.codecraftr.kata.librarykukumber.domain
 
 interface BookInventory {
     fun getBooks(): List<String>

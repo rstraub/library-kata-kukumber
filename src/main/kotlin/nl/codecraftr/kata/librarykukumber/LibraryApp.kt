@@ -1,5 +1,8 @@
 package nl.codecraftr.kata.librarykukumber
 
+import nl.codecraftr.kata.librarykukumber.domain.BookInventory
+import nl.codecraftr.kata.librarykukumber.storage.InMemoryBookInventory
+
 class LibraryApp(private val bookInventory: BookInventory) : BookInventory by bookInventory {
     companion object {
         fun create(): LibraryApp {
@@ -20,13 +23,3 @@ fun main() {
     println("Shutting Down Library")
 }
 
-class InMemoryBookInventory : BookInventory {
-    private val books = mutableListOf<String>()
-    override fun getBooks() : List<String> {
-        return books
-    }
-
-    override fun addBooks(booksToAdd: List<String>) {
-        books.addAll(booksToAdd)
-    }
-}

@@ -1,32 +1,48 @@
 package integration
 
 import io.cucumber.java8.En
-import io.cucumber.java8.PendingException
 import nl.codecraftr.kata.librarykukumber.LibraryApp
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
 
-class BookInventoryStepDefs: En {
+class BookInventoryStepDefs : En {
+    private val libraryApp = LibraryApp()
+    private val books = listOfBooks()
+    private var results = emptyList<String>()
+
     init {
-        val libraryApp = LibraryApp()
-        val books = listOf(
-            "The Gunslinger",
-            "The Drawing of the Three"
-        )
-        var results = listOf<String>()
-
         Given("The library has books") {
-            libraryApp.addBooks(books)
+            addBooksToLibrary()
         }
         When("The user asks for the books") {
-            results = libraryApp.getBooks()
+            getBooksFromLibrary()
         }
         Then("The books in the library are shown") {
-            assertEquals(
-                books,
-                results,
-                "Books retrieved from library do not match the supplied books"
-            )
+            retrievedBooksShouldMatch(results)
         }
     }
+
+    private fun addBooksToLibrary() = libraryApp.addBooks(books)
+
+    private fun getBooksFromLibrary() {
+        results = libraryApp.getBooks()
+    }
+
+    private fun retrievedBooksShouldMatch(expected: List<String>) {
+        assertEquals(
+            books,
+            expected,
+            "Books retrieved from library do not match the supplied books"
+        )
+    }
 }
+
+private fun listOfBooks() =
+    listOf(
+        "The Dark Tower I: The Gunslinger",
+        "The Dark Tower II: The Drawing of the Three",
+        "The Dark Tower III: The Waste Lands",
+        "The Dark Tower IV: Wizard and Glass",
+        "The Dark Tower V: Wolves of the Calla",
+        "The Dark Tower VI: Song of Susannah",
+        "The Dark Tower VII: The Dark Tower"
+    )

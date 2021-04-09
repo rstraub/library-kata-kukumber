@@ -16,6 +16,7 @@ internal class LibraryAppTest {
     @BeforeEach
     internal fun setUp() {
         inventory = mockk(relaxed = true)
+        inventoryReturnsBooks()
         app = LibraryApp(inventory)
         books = emptyList()
     }
@@ -23,7 +24,6 @@ internal class LibraryAppTest {
     @Test
     internal fun `should return all books in the inventory`() {
         books = listOfBooks()
-        every { inventory.getBooks() } returns books
 
         getBooksFromLibrary()
 
@@ -36,7 +36,7 @@ internal class LibraryAppTest {
 
         addBooksToLibrary()
 
-        verify(exactly = 1) { inventory.addBooks(books) }
+        verifyBooksWereAddedToInventory()
     }
 
     private fun addBooksToLibrary() {
@@ -53,5 +53,13 @@ internal class LibraryAppTest {
             results,
             "Books retrieved from library do not match the supplied books"
         )
+    }
+
+    private fun inventoryReturnsBooks() {
+        every { inventory.getBooks() } returns books
+    }
+
+    private fun verifyBooksWereAddedToInventory() {
+        verify(exactly = 1) { inventory.addBooks(books) }
     }
 }

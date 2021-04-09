@@ -6,6 +6,6 @@ import org.junit.jupiter.api.Test
 internal class CanaryTest {
     @Test
     internal fun `canary test`() {
-        assertFalse(true)
+        assertFalse(false)
     }
 }

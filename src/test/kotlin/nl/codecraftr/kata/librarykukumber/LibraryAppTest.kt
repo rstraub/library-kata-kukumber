@@ -6,6 +6,7 @@ import io.mockk.verify
 import nl.codecraftr.kata.librarykukumber.domain.BookInventory
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
 internal class LibraryAppTest {
@@ -21,23 +22,29 @@ internal class LibraryAppTest {
         books = emptyList()
     }
 
-    @Test
-    internal fun `should return all books in the inventory`() {
-        books = listOfBooks()
-        inventoryReturnsBooks()
+    @Nested
+    inner class GetBooks {
+        @Test
+        internal fun `should return all books in the inventory`() {
+            books = listOfBooks()
+            inventoryReturnsBooks()
 
-        getBooksFromLibrary()
+            getBooksFromLibrary()
 
-        retrievedBooksShouldMatchLibrary()
+            retrievedBooksShouldMatchLibrary()
+        }
     }
 
-    @Test
-    internal fun `should add books to the inventory`() {
-        books = listOfBooks()
+    @Nested
+    inner class AddBooks {
+        @Test
+        internal fun `should add books to the inventory`() {
+            books = listOfBooks()
 
-        addBooksToLibrary()
+            addBooksToLibrary()
 
-        verifyBooksWereAddedToInventory()
+            verifyBooksWereAddedToInventory()
+        }
     }
 
     private fun inventoryReturnsBooks() {

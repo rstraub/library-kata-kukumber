@@ -11,5 +11,13 @@ class LibraryApp {
 }
 
 fun main() {
-    println("starting")
+    println("Starting Library")
+    println("--------")
+    val app = LibraryApp()
+    app.addBooks(listOf("The Hobbit"))
+    val books = app.getBooks()
+    println("Books in library:")
+    println(books)
+    println("--------")
+    println("Shutting Down Library")
 }

@@ -2,6 +2,7 @@ package integration
 
 import io.cucumber.java8.En
 import nl.codecraftr.kata.librarykukumber.LibraryApp
+import nl.codecraftr.kata.librarykukumber.listOfBooks
 import org.junit.jupiter.api.Assertions.assertEquals
 
 class BookInventoryStepDefs : En {
@@ -35,14 +36,3 @@ class BookInventoryStepDefs : En {
         )
     }
 }
-
-private fun listOfBooks() =
-    listOf(
-        "The Dark Tower I: The Gunslinger",
-        "The Dark Tower II: The Drawing of the Three",
-        "The Dark Tower III: The Waste Lands",
-        "The Dark Tower IV: Wizard and Glass",
-        "The Dark Tower V: Wolves of the Calla",
-        "The Dark Tower VI: Song of Susannah",
-        "The Dark Tower VII: The Dark Tower"
-    )

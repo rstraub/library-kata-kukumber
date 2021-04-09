@@ -2,8 +2,8 @@ package nl.codecraftr.kata.librarykukumber.storage
 
 import nl.codecraftr.kata.librarykukumber.domain.BookInventory
 
-class InMemoryBookInventory(initialBooks: List<String> = emptyList()) : BookInventory {
-    private val books = initialBooks.toMutableList()
+class InMemoryBookInventory() : BookInventory {
+    private val books = mutableListOf<String>()
     override fun getBooks() : List<String> {
         return books
     }

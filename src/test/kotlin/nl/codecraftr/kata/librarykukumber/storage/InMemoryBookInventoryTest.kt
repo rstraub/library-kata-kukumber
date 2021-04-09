@@ -13,37 +13,36 @@ internal class InMemoryBookInventoryTest {
     @BeforeEach
     internal fun setUp() {
         results = emptyList()
-        inventoryWithBooks(emptyList())
+        inventory = InMemoryBookInventory()
     }
 
-    @Nested
-    inner class GetBooks {
-        @Test
-        internal fun `should return all books stored in the inventory`() {
-            val books = listOfBooks()
-            inventoryWithBooks(books)
+    @Test
+    internal fun `should add books to the inventory given collection of books`() {
+        val books = listOfBooks()
 
-            retrieveBooks()
+        addBooks(books)
+        retrieveBooks()
 
-            retrievedBooksShouldMatch(books)
-        }
+        retrievedBooksShouldMatch(books)
     }
 
-    @Nested
-    inner class AddBooks {
-        @Test
-        internal fun `should add books to the inventory`() {
-            val books = listOfBooks()
+    @Test
+    internal fun `should add new books to existing books given collection of books`() {
+        val books = listOfBooks()
+        val newBooks = listOf("Other Book")
 
-            addBooks(books)
-            retrieveBooks()
+        addBooks(books)
+        addBooks(newBooks)
+        retrieveBooks()
 
-            retrievedBooksShouldMatch(books)
-        }
+        retrievedBooksShouldMatch(books + newBooks)
     }
 
-    private fun inventoryWithBooks(books: List<String>) {
-        inventory = InMemoryBookInventory(books)
+    @Test
+    internal fun `should return empty list given no books were added`() {
+        retrieveBooks()
+
+        retrievedBooksShouldMatch(emptyList())
     }
 
     private fun retrieveBooks() {

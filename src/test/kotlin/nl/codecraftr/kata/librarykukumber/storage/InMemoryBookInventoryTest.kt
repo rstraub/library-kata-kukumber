@@ -15,7 +15,7 @@ internal class InMemoryBookInventoryTest {
     internal fun setUp() {
         books = emptyList()
         results = emptyList()
-        inventory = InMemoryBookInventory()
+        inventoryWithBooks()
     }
 
     @Nested

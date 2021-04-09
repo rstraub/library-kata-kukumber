@@ -6,7 +6,7 @@ import nl.codecraftr.kata.librarykukumber.listOfBooks
 import org.junit.jupiter.api.Assertions.assertEquals
 
 class BookInventoryStepDefs : En {
-    private val libraryApp = LibraryApp()
+    private val libraryApp = LibraryApp.create()
     private val books = listOfBooks()
     private var results = emptyList<String>()
 

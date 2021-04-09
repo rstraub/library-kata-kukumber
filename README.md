@@ -15,4 +15,5 @@ TODO: once kata is completed
 * Kotlin
 * Maven
 * Junit 5
+* MockK
 * Cucumber

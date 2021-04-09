@@ -19,6 +19,7 @@
         <maven-surefire.version>3.0.0-M5</maven-surefire.version>
         <maven-failsafe.version>3.0.0-M5</maven-failsafe.version>
         <cucumber.version>6.10.2</cucumber.version>
+        <mockk.version>1.11.0</mockk.version>
     </properties>
 
     <dependencies>
@@ -55,6 +56,12 @@
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.mockk</groupId>
+            <artifactId>mockk</artifactId>
+            <version>${mockk.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

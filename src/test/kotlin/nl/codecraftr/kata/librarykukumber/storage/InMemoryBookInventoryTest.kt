@@ -7,31 +7,42 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
 internal class InMemoryBookInventoryTest {
-    private lateinit var books: List<String>
     private lateinit var results: List<String>
     private lateinit var inventory: InMemoryBookInventory
 
     @BeforeEach
     internal fun setUp() {
-        books = emptyList()
         results = emptyList()
-        inventoryWithBooks()
+        inventoryWithBooks(emptyList())
     }
 
     @Nested
     inner class GetBooks {
         @Test
         internal fun `should return all books stored in the inventory`() {
-            books = listOfBooks()
-            inventoryWithBooks()
+            val books = listOfBooks()
+            inventoryWithBooks(books)
 
             retrieveBooks()
 
-            retrievedBooksShouldMatchSupplied()
+            retrievedBooksShouldMatch(books)
         }
     }
 
-    private fun inventoryWithBooks() {
+    @Nested
+    inner class AddBooks {
+        @Test
+        internal fun `should add books to the inventory`() {
+            val books = listOfBooks()
+
+            addBooks(books)
+            retrieveBooks()
+
+            retrievedBooksShouldMatch(books)
+        }
+    }
+
+    private fun inventoryWithBooks(books: List<String>) {
         inventory = InMemoryBookInventory(books)
     }
 
@@ -39,7 +50,11 @@ internal class InMemoryBookInventoryTest {
         results = inventory.getBooks()
     }
 
-    private fun retrievedBooksShouldMatchSupplied() {
+    private fun addBooks(books: List<String>) {
+        inventory.addBooks(books)
+    }
+
+    private fun retrievedBooksShouldMatch(books: List<String>) {
         assertEquals(
             books,
             results,

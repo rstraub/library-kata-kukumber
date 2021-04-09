@@ -6,26 +6,37 @@ import org.junit.jupiter.api.Test
 
 internal class LibraryAppTest {
     private lateinit var app: LibraryApp
+    private lateinit var books: List<String>
+    private lateinit var results: List<String>
 
     @BeforeEach
     internal fun setUp() {
         app = LibraryApp()
+        books = emptyList()
     }
 
     @Test
     internal fun `should return all books in the inventory`() {
-        val books = listOfBooks()
-        app.addBooks(books)
+        books = listOfBooks()
 
-        val results = app.getBooks()
+        addBooksToLibrary()
+        getBooksFromLibrary()
 
-        results.shouldMatch(books)
+        retrievedBooksShouldMatchLibrary()
     }
 
-    private fun List<String>.shouldMatch(expected: List<String>) {
+    private fun getBooksFromLibrary() {
+        results = app.getBooks()
+    }
+
+    private fun addBooksToLibrary() {
+        app.addBooks(books)
+    }
+
+    private fun retrievedBooksShouldMatchLibrary() {
         assertEquals(
-            expected,
-            this,
+            books,
+            results,
             "Books retrieved from library do not match the supplied books"
         )
     }

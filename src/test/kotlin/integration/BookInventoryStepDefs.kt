@@ -18,7 +18,7 @@ class BookInventoryStepDefs : En {
             getBooksFromLibrary()
         }
         Then("The books in the library are shown") {
-            retrievedBooksShouldMatch(results)
+            retrievedBooksShouldMatchLibrary()
         }
     }
 
@@ -28,10 +28,10 @@ class BookInventoryStepDefs : En {
         results = libraryApp.getBooks()
     }
 
-    private fun retrievedBooksShouldMatch(expected: List<String>) {
+    private fun retrievedBooksShouldMatchLibrary() {
         assertEquals(
             books,
-            expected,
+            results,
             "Books retrieved from library do not match the supplied books"
         )
     }

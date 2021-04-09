@@ -2,6 +2,7 @@ package nl.codecraftr.kata.librarykukumber
 
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -14,7 +15,7 @@ internal class LibraryAppTest {
 
     @BeforeEach
     internal fun setUp() {
-        inventory = mockk()
+        inventory = mockk(relaxed = true)
         app = LibraryApp(inventory)
         books = emptyList()
     }
@@ -27,6 +28,15 @@ internal class LibraryAppTest {
         getBooksFromLibrary()
 
         retrievedBooksShouldMatchLibrary()
+    }
+
+    @Test
+    internal fun `should add books to the inventory`() {
+        books = listOfBooks()
+
+        addBooksToLibrary()
+
+        verify(exactly = 1) { inventory.addBooks(books) }
     }
 
     private fun addBooksToLibrary() {

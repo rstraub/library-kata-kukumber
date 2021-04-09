@@ -1,19 +1,10 @@
 package nl.codecraftr.kata.librarykukumber
 
-class LibraryApp(private val bookInventory: BookInventory) : BookInventory {
+class LibraryApp(private val bookInventory: BookInventory) : BookInventory by bookInventory {
     companion object {
         fun create(): LibraryApp {
             return LibraryApp(InMemoryBookInventory())
         }
-    }
-
-    private val books = mutableListOf<String>()
-    override fun getBooks() : List<String> {
-        return bookInventory.getBooks()
-    }
-
-    override fun addBooks(booksToAdd: List<String>) {
-        books.addAll(booksToAdd)
     }
 }
 

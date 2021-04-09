@@ -6,7 +6,8 @@ class LibraryApp {
         return books
     }
 
-    fun addBooks(books: List<String>) {
+    fun addBooks(booksToAdd: List<String>) {
+        books.addAll(booksToAdd)
     }
 }
 
